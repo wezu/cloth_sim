@@ -29,7 +29,7 @@ void vshader(
 	 out float4 l_position : POSITION,
 	 uniform float4x4 mat_modelproj
 ) {     
-	 l_position = mul(mat_modelproj, vtx_position+(offset*(1.0-vtx_color.r)));
+	 l_position = mul(mat_modelproj, vtx_position-(offset*(1.0-vtx_color.r)));
 	 l_eye_position = mul(trans_model_to_view, vtx_position);
 	 l_eye_normal.xyz = mul((float3x3)tpose_view_to_model, vtx_normal.xyz);
 	 l_eye_normal.w = 0;

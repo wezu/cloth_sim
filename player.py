@@ -28,7 +28,7 @@ class PC(DirectObject):
         self.actor.reparentTo(render)
         self.actor.setShader(Shader.load("shaders/player_cloth_shader.cg"))
         render.setShaderInput("offset",Vec4(0,0,0,0))        
-        self.actor.find("**/hair").setShader(Shader.load("shaders/hair_shader.cg"))   
+        #self.actor.find("**/hair").setShader(Shader.load("shaders/hair_shader.cg"))   
         
         #>>>>>>>>>>>>>>>>>>>>>key mapping:<<<<<<<<<<<<<<<<<<<<<        
         self.keyMap = {'key_forward': False,
@@ -79,9 +79,9 @@ class PC(DirectObject):
             if(anim!="walk"):
                 self.actor.loop("walk")            
         if self.keyMap["key_right"]:                         
-            self.actor.setH(self.actor, -dt*120)          
+            self.actor.setH(self.actor, -dt*180)          
         if self.keyMap["key_left"]:              
-            self.actor.setH(self.actor, dt*120)   
+            self.actor.setH(self.actor, dt*180)   
         if self.keyMap["key_back"]:              
             self.actor.setY(self.actor, dt*40)
             self.isIdle=False
