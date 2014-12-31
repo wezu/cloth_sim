@@ -7,9 +7,9 @@ from direct.showbase.PythonUtil import fitSrcAngle2Dest
 
 class PC(DirectObject):    
     
-    def __init__(self, keymap):          
+    def __init__(self, keymap, model_name='models/model_girl'):          
         #>>>>>>>>>>>>>>>>>>>>>actor<<<<<<<<<<<<<<<<<<<<<
-        self.actor=Actor('models/model_girl',
+        self.actor=Actor(model_name,
                         {'idle':'models/anim_idle',
                          'die':'models/anim_die',
                          'push_button':'models/anim_push_button',
@@ -26,7 +26,8 @@ class PC(DirectObject):
         self.actor.setH(180.0)         
         self.actor.loop("idle")         
         self.actor.reparentTo(render)
-        self.actor.setShader(Shader.load("shaders/player_shader.cg"))  
+        self.actor.setShader(Shader.load("shaders/player_cloth_shader.cg"))
+        render.setShaderInput("offset",Vec4(0,0,0,0))        
         self.actor.find("**/hair").setShader(Shader.load("shaders/hair_shader.cg"))   
         
         #>>>>>>>>>>>>>>>>>>>>>key mapping:<<<<<<<<<<<<<<<<<<<<<        
@@ -78,15 +79,9 @@ class PC(DirectObject):
             if(anim!="walk"):
                 self.actor.loop("walk")            
         if self.keyMap["key_right"]:                         
-            self.actor.setH(self.actor, -dt*120)                        
-            self.isIdle=False            
-            if(anim!="walk"):
-                self.actor.loop("walk")
+            self.actor.setH(self.actor, -dt*120)          
         if self.keyMap["key_left"]:              
-            self.actor.setH(self.actor, dt*120)            
-            self.isIdle=False            
-            if(anim!="walk"):
-                self.actor.loop("walk")
+            self.actor.setH(self.actor, dt*120)   
         if self.keyMap["key_back"]:              
             self.actor.setY(self.actor, dt*40)
             self.isIdle=False
